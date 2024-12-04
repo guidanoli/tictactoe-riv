@@ -1,8 +1,8 @@
 NAME= tictactoe
 RIVEMU= rivemu
 RIVEMU_EXEC= $(RIVEMU) -workspace -quiet -no-window -sdk -exec
-RIVEMU_RUN= $(RIVEMU) -bench
-RIVEMU_JIT= $(RIVEMU) -workspace -exec riv-jit-c
+RIVEMU_RUN= $(RIVEMU) -bench -print-outcard
+RIVEMU_JIT= $(RIVEMU) -workspace -print-outcard -exec riv-jit-c
 CFLAGS= $(shell $(RIVEMU_EXEC) riv-opt-flags -Ospeed)
 SOURCE_FILES= main.c
 COMPRESSION= xz

@@ -230,9 +230,47 @@ enum game_state_t check_placed_symbol(int64_t x, int64_t y, enum symbol_t symbol
     return STATE_ONGOING;
 }
 
+struct outcard_t
+{
+    int score;
+    char winner[2];
+};
+
+struct outcard_t create_outcard()
+{
+    struct outcard_t outcard;
+
+    if (state == STATE_OUT_OF_TILES)
+    {
+        outcard.score = 0;
+        outcard.winner[0] = '\0';
+    }
+    else
+    {
+        outcard.score = 10 - symbols_count;
+        outcard.winner[0] = curr_player_is_circle ? 'O' : 'X';
+        outcard.winner[1] = '\0';
+    }
+
+    return outcard;
+}
+
+void write_outcard(struct outcard_t const outcard)
+{
+    riv->outcard_len = riv_snprintf(
+        (char*)riv->outcard,
+        RIV_SIZE_OUTCARD,
+        "JSON{\"score\": %d, \"winner\": \"%s\"}",
+        outcard.score,
+        outcard.winner);
+}
+
 void end_game()
 {
-    riv->stop_frame = riv->frame + 3 * riv->target_fps;
+    struct outcard_t outcard = create_outcard();
+    write_outcard(outcard);
+
+    riv->stop_frame = riv->frame + riv->target_fps;
 }
 
 void update()
