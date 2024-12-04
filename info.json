@@ -1,0 +1,13 @@
+{
+    "name": "Tic-tac-toe",
+    "summary": "The classic childhood game",
+    "description": "Use numbers 1-9 to place Xs and Os.",
+    "tags": ["2d", "tic-tac-toe"],
+    "authors": [{
+        "name": "Guilherme Dantas",
+        "link": "https://github.com/guidanoli"
+    }],
+    "links": [
+        "https://github.com/guidanoli/tictactoe"
+    ]
+}
